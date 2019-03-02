@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="7dp"
+    tools:context=".MainActivity"
+    android:animateLayoutChanges="true">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/pool_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/pool"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pool url:port"
+            android:inputType="text"
+            android:text="gulf.moneroocean.stream:20001" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/username_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pool_til"
+        android:layout_centerHorizontal="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pool Username"
+            android:text="45dkFUYxetQ28PVH91HKZYFkzmMvpF9YZTpWbimHx8W6EcH3SvtrfaAckDY68cZ4MQCtpWn5xAXJ9gEiiEm7rNcx9rdNZzk"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/password_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username_til"
+        android:layout_centerHorizontal="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pool Password"
+            android:text="minerNew10"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/run"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password_til"
+        android:layout_centerHorizontal="true"
+        android:enabled="false"
+        android:text="Checking if running..." />
+
+    <TextView
+        android:id="@+id/accepted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/run"
+        android:layout_alignBottom="@+id/run"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/run"
+        android:gravity="start|center_vertical"
+        android:paddingStart="7dp"
+        android:text="Accepted: 0" />
+
+    <TextView
+        android:id="@+id/hashrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/run"
+        android:layout_alignBottom="@+id/run"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/run"
+        android:gravity="center_vertical|end"
+        android:paddingEnd="7dp"
+        android:text="Hashrate: 0 H/s" />
+
+
+</RelativeLayout>
