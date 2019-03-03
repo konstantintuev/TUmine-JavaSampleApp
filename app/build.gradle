@@ -25,11 +25,11 @@ dependencies {
     //TODO: choose which version to use
 
     //This version of the TUmine Monero .aar library doesn't contain native miner. The needed file will be downloaded once.
-    implementation 'tuev.co:tumine:10.0-nonative'
+    implementation 'tuev.co:tumine:11.0-nonative'
 
     //This version of the TUmine Monero .aar library contains native miner with SSL support. -> THE MINER HAS BIGGER SIZE (contains openssl)
-    //implementation 'tuev.co:tumine:10.0-ssl'
+    //implementation 'tuev.co:tumine:11.0-ssl'
 
     //This version of the TUmine Monero .aar library contains native miner WITHOUT SSL support.
-    //implementation 'tuev.co:tumine:10.0-basic'
+    //implementation 'tuev.co:tumine:11.0-basic'
 }
