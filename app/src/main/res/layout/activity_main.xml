@@ -87,5 +87,15 @@
         android:paddingEnd="7dp"
         android:text="Hashrate: 0 H/s" />
 
+    <Switch
+        android:id="@+id/ssl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/run"
+        android:layout_toStartOf="@+id/hashrate"
+        android:layout_toEndOf="@+id/accepted"
+        android:checked="true"
+        android:text="Use SSL connection" />
+
 
 </RelativeLayout>

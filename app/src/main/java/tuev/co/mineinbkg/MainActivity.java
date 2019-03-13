@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -25,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText pool;
     private EditText username;
     private EditText password;
+
     private Button run;
+    private Switch useSSL;
 
     private TextView accepted;
     private TextView hashrate;
@@ -136,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                     //                            pass context
                     infoPassing = new InfoPassing(MainActivity.this);
                     //add all the mining pools (the first is used, other are for backup)
-                    infoPassing.getMinerConfig().getPools().add(new Pool(pool.getText().toString(), username.getText().toString(), password.getText().toString()).setUseSSL(true));
+                    infoPassing.getMinerConfig().getPools().add(new Pool(pool.getText().toString(), username.getText().toString(), password.getText().toString()).setUseSSL(useSSL.isChecked()));
                     //which cores to use normally
                     infoPassing.getMinerConfig().setCoresToUse(cores);
                     //set class made to provide the service with a Notification
@@ -149,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     //this option makes the 'MineConnector' useless when enabled
                     infoPassing.getMinerOutput().setSilent(false);
                     //check for updates every time before starting to miner
-                    infoPassing.getMinerConfig().setUpdateOverInternet(false);
+                    infoPassing.getMinerConfig().setUpdateOverInternet(true);
 
                     infoPassing.getMinerOutput().setDebugParams(true);
 
@@ -202,7 +205,9 @@ public class MainActivity extends AppCompatActivity {
         pool = findViewById(R.id.pool);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
+
         run = findViewById(R.id.run);
+        useSSL = findViewById(R.id.ssl);
 
         hashrate = findViewById(R.id.hashrate);
         accepted = findViewById(R.id.accepted);
