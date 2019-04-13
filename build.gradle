@@ -17,13 +17,13 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url 'https://maven.tuev-co.eu/repository/internal'
+        }
         google()
         jcenter()
         flatDir {
             dirs 'libs'
-        }
-        maven {
-            url 'https://maven.tuev-co.eu/repository/internal'
         }
     }
 }

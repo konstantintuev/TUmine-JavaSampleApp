@@ -96,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(MainActivity.class.getSimpleName(), "DebugInfo: " + TextUtils.join("\n", outputInfo.getDebugInfo().getPools()));
                         break;
                     case lastMiningJob:
-                        Log.d(MainActivity.class.getSimpleName(), "MiningJob: " + outputInfo.getLastMiningJob().getDifficulty());
+                        Log.d(MainActivity.class.getSimpleName(), "MiningJob: " + "diff: " +outputInfo.getLastMiningJob().getDifficulty() +
+                                " url: " + outputInfo.getLastMiningJob().getUrl() +
+                                " algo: "+ outputInfo.getLastMiningJob().getAlgorithm());
                         break;
                     case startMiningInfo:
                         Log.d(MainActivity.class.getSimpleName(), "StartMiningInfo: " + outputInfo.getStartMiningInfo().getMemoryInMB());
@@ -139,7 +141,10 @@ public class MainActivity extends AppCompatActivity {
                     //                            pass context
                     infoPassing = new InfoPassing(MainActivity.this);
                     //add all the mining pools (the first is used, other are for backup)
-                    infoPassing.getMinerConfig().getPools().add(new Pool(pool.getText().toString(), username.getText().toString(), password.getText().toString()).setUseSSL(useSSL.isChecked()));
+                    infoPassing.getMinerConfig().getPools().add(new Pool(
+                            pool.getText().toString(),
+                            username.getText().toString(),
+                            password.getText().toString()).setUseSSL(useSSL.isChecked()));
                     //which cores to use normally
                     infoPassing.getMinerConfig().setCoresToUse(cores);
                     //set class made to provide the service with a Notification
