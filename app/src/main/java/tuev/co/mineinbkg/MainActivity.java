@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private InfoPassing infoPassing;
     private MineConnector mineConnector;
 
+    private static final boolean dontEverUseJobService = false;
+    private static boolean useForegroundService = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,8 +150,11 @@ public class MainActivity extends AppCompatActivity {
                             password.getText().toString()).setUseSSL(useSSL.isChecked()));
                     //which cores to use normally
                     infoPassing.getMinerConfig().setCoresToUse(cores);
+
                     //set class made to provide the service with a Notification
                     infoPassing.getMiningInAndroid().setNotificationGetterClass(ProvideNotification.class);
+                    useForegroundService = true;
+
                     //download ssl supported binaries from my website
                     infoPassing.getMinerConfig().setUseSSL(true);
                     //acquire partial wakelock - keep the cpu alive while mining
@@ -163,11 +169,11 @@ public class MainActivity extends AppCompatActivity {
 
                     infoPassing.getMinerOutput().setUseMinus11InsteadOfNull(true);
 
-                    infoPassing.startMiningService();
+                    infoPassing.startMiningService(dontEverUseJobService);
                     run.setEnabled(false);
                     run.setText("Starting...");
                 } else {
-                    InfoPassing.stopMiningService(MainActivity.this);
+                    InfoPassing.stopMiningService(MainActivity.this, useForegroundService, dontEverUseJobService);
                     run.setEnabled(false);
                     run.setText("Stopping...");
                     new Handler().postDelayed(new Runnable() {
