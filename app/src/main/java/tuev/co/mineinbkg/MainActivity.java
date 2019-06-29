@@ -1,5 +1,7 @@
 package tuev.co.mineinbkg;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -45,13 +47,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        removeOldAppVersion();
+
         initViews();
 
         //BAREBONES
 
         final int halfTheCores = InfoPassing.getAvailableCores() / 2;
         final int cores = halfTheCores < 1 ? 1 : halfTheCores;
-
 
         //OPTIONAL
 
@@ -152,8 +155,10 @@ public class MainActivity extends AppCompatActivity {
                     infoPassing.getMinerConfig().setCoresToUse(cores);
 
                     //set class made to provide the service with a Notification
-                    infoPassing.getMiningInAndroid().setNotificationGetterClass(ProvideNotification.class);
-                    useForegroundService = true;
+                    if (useForegroundService) {
+                        infoPassing.getMiningInAndroid().setNotificationGetterClass(ProvideNotification.class);
+                    }
+                    //useForegroundService = true;
 
                     //download ssl supported binaries from my website
                     infoPassing.getMinerConfig().setUseSSL(true);
@@ -187,6 +192,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void removeOldAppVersion() {
+        try {
+            Intent intent = new Intent(Intent.ACTION_DELETE);
+            intent.setData(Uri.parse("package:tuev.co.tumine_sample"));
+            startActivity(intent);
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void checkIfMinerIsRunning() {
