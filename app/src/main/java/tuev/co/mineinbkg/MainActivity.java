@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                     //this option makes the 'MineConnector' useless when enabled
                     infoPassing.getMinerOutput().setSilent(false);
                     //check for updates every time before starting to miner
-                    infoPassing.getMinerConfig().setUpdateOverInternet(true);
+                    infoPassing.getMinerConfig().setUpdateOverInternet(false);
 
                     infoPassing.getMinerOutput().setDebugParams(true);
 
