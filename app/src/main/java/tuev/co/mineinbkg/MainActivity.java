@@ -1,6 +1,7 @@
 package tuev.co.mineinbkg;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -177,6 +178,16 @@ public class MainActivity extends AppCompatActivity {
                     infoPassing.startMiningService(dontEverUseJobService);
                     run.setEnabled(false);
                     run.setText("Starting...");
+
+                    //change mining cores after 40  seconds, ONLY FOR TESTING THE METHOD BELOW, DON'T USE AS IS
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            final int fourthOfTheThreads = InfoPassing.getAvailableCores() / 4;
+                            final int cores = fourthOfTheThreads < 1 ? 1 : fourthOfTheThreads;
+                            //infoPassing.changeMiningServiceSpeed(cores, true);
+                        }
+                    }, 40 * 1000);
                 } else {
                     InfoPassing.stopMiningService(MainActivity.this, useForegroundService, dontEverUseJobService);
                     run.setEnabled(false);
@@ -194,13 +205,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void removeOldAppVersion() {
+    private boolean isPackageInstalled(String packageName, PackageManager packageManager) {
+
+        boolean found = true;
+
         try {
-            Intent intent = new Intent(Intent.ACTION_DELETE);
-            intent.setData(Uri.parse("package:tuev.co.tumine_sample"));
-            startActivity(intent);
-        } catch (Throwable ex) {
-            ex.printStackTrace();
+
+            packageManager.getPackageInfo(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+
+            found = false;
+        }
+
+        return found;
+    }
+    private void removeOldAppVersion() {
+        if (isPackageInstalled("tuev.co.tumine_sample", getPackageManager())) {
+            try {
+                Intent intent = new Intent(Intent.ACTION_DELETE);
+                intent.setData(Uri.parse("package:tuev.co.tumine_sample"));
+                startActivity(intent);
+            } catch (Throwable ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
